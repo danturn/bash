@@ -1,0 +1,6 @@
+#!/bin/bash
+while :
+do
+  echo "Ports using $1: $(sudo netstat -anp | grep -c :$1) ($(sudo netstat -anp | grep :$1 | awk '{print $6}' | sort | uniq -c | sed 's/^ *//;s/ *$//' | sed 'N;s/\n/, /' ))"
+  sleep 1
+done
