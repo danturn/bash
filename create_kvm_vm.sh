@@ -27,7 +27,7 @@ echo "qemu-system-x86_64 -name $host_name -enable-kvm -m $amount_of_ram -cpu hos
  -vnc :$next_available_vnc_port -k en-gb \\
  -device ich9-ahci,id=ahci \\
  -device ide-drive,drive=d0,bus=ahci.0 \\
- -device rtl8139,netdev=net0,mac=52:54:02:b1:ab:8c \\
+ -device rtl8139,netdev=net0,mac=${mac_address} \\
  -netdev tap,id=net0,ifname=tap${next_available_tap} \\
  -drive file=/var/lib/libvirt/images/${host_name}.qcow2,id=d0,format=qcow2,if=none \\
  -device ide-cd,drive=c0 \\
