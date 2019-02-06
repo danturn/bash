@@ -1,0 +1,7 @@
+#! /bin/bash
+secret=$(aws secretsmanager get-secret-value --secret-id users_with_keys_testing)
+while IFS="=" read -r key value; do
+  echo $key
+  echo $value
+done < <(jq -r ".SecretString | fromjson | to_entries|map(\"\(.key)=\(.value)\")|.[]" <<< "$secret")
+#    ^ ^  First < is redirection, second is process substitution.
