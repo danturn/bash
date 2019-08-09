@@ -3,12 +3,6 @@ if [ ! -f "/etc/apt/sources.list.d/google.list" ]; then
   sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 fi
 
-if [ ! -f "/etc/apt/sources.list.d/virtualbox.list" ]; then
-  wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
-  sudo sh -c 'echo "deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian xenial contrib" >> /etc/apt/sources.list.d/virtualbox.list'
-fi
-
-
 if [ ! -f "/etc/apt/sources.list.d/sublime-text.list" ]; then
   wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
   echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
