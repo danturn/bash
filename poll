@@ -1,14 +1,27 @@
 #! /bin/bash
 RED='\033[0;31m'
 GREEN='\033[0;32m'
-NC='\033[0m' # No Color
+NO_COLOUR='\033[0m' # No Color
+DOWN="false"
 
 while true; do
-  result=$(wget --spider -S "$1" 2>&1 | grep "HTTP/" | awk '{print $2}')
-  if [ $result -eq 200 ]
+  result=$(curl -s -o /dev/null -I -w "%{http_code}" "$1")
+  if [ $result -eq 200 ];
   then
-    printf "${GREEN}."
+    if [ $DOWN == "true" ];
+    then
+      echo -e "\n${GREEN} `date` - $result"
+      DOWN="false"
+    else
+      printf "${GREEN}."
+    fi
   else
-    echo -e "\n${RED} `date` - $result"
+    if [ $DOWN == "false" ];
+    then
+      echo -e "\n${RED} `date` - $result"
+      DOWN="true"
+    else
+      printf "${RED}."
+    fi
   fi
 done

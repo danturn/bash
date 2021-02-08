@@ -1,0 +1,9 @@
+#!/bin/bash
+set -eu
+
+echo "Replacing: $1 with: $2"
+find="$1"
+replace="$2"
+cmd="s/$find/$replace/g"
+find lib test -type f \( -name '*.ex' -o -name '*.exs' -o -name "*.eex" \) -print0 | xargs -0 sed -i "$cmd"
+#find . -type f \( -name '*.ex' -o -name '*.exs' -o -name "*.eex" \) -print0 | xargs -0 sed -i "$cmd"
